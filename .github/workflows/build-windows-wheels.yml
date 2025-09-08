@@ -26,21 +26,28 @@ jobs:
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Build wheel with maturin
-        uses: PyO3/maturin-action@v1
-        with:
-          command: build
-          args: --release -o dist
-          working-directory: windows-capture-python
+      - name: Install maturin
+        run: python -m pip install --upgrade pip maturin
+
+      - name: Build wheels
+        working-directory: windows-capture-python
+        run: |
+          maturin build --release -o dist
+          dir dist
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows-capture-wheels
-          path: windows-capture-python/dist/*
+          path: windows-capture-python/dist/*.whl
 
       - name: Upload wheels to GitHub Release
         if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: windows-capture-python/dist/*
+          files: |
+            windows-capture-python/dist/*.whl
+            windows-capture-python/dist/*.tar.gz
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
