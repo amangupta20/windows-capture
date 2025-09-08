@@ -1,5 +1,8 @@
 name: Build Windows wheels
 
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
   push:
@@ -36,7 +39,7 @@ jobs:
           path: dist/*
 
       - name: Upload wheels to GitHub Release
-        if: startsWith(github.ref, 'refs/tags/')
+        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*
