@@ -30,16 +30,17 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           command: build
-          args: --release -m windows-capture-python/pyproject.toml -o dist
+          args: --release -o dist
+          working-directory: windows-capture-python
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows-capture-wheels
-          path: dist/*
+          path: windows-capture-python/dist/*
 
       - name: Upload wheels to GitHub Release
         if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*
+          files: windows-capture-python/dist/*
