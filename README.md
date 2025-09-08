@@ -1,3 +1,20 @@
+> [!IMPORTANT]
+> ## Note on This Fork
+>
+> This is a fork of the original [NiiightmareXD/windows-capture](https://github.com/NiiightmareXD/windows-capture) repository.
+>
+> It was created specifically to merge the code from **Pull Request #151**, which introduces a `callback` argument for more efficient, event-driven frame capture.
+>
+> The purpose of this fork is to serve as a stable, pinned dependency for a project, ensuring long-term consistency.
+>
+> All credit for the this library goes to **NiiightmareXD**. The original `README` follows below this notice.
+
+---
+
+
+
+
+
 # Windows Capture &emsp; [![Licence]][Licence URL] [![Build Status]][repository] [![Latest Version]][crates.io]
 
 [Licence]: https://img.shields.io/crates/l/windows-capture
