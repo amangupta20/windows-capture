@@ -54,9 +54,7 @@ jobs:
         if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            windows-capture-python/dist/*.whl
-            windows-capture-python/dist/*.tar.gz
+          files: windows-capture-python/dist/*.whl
           fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
